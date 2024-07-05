@@ -89,7 +89,14 @@ also the sql code should not have ``` in beginning or end and sql word in output
 st.set_page_config(page_title="I Can Retrieve Any SQL Query")
 st.header("Gemini App To Retrieve SQL Data")
 
-question = st.text_input("Input: ", key="input")
+# App description
+st.write("""
+Welcome to the Gemini SQL Query Generator! This app leverages the power of Google's Generative AI to convert your natural language questions into SQL queries.
+Simply input your question in plain English, and our AI model will generate the corresponding SQL query, execute it on the student database, and return the results.
+This tool is perfect for those who want to interact with databases without needing to write SQL queries manually.
+""")
+
+question = st.text_input("Input your question related to the student database:", key="input")
 submit = st.button("Ask the Question")
 
 # If submit is clicked
@@ -99,7 +106,7 @@ if submit:
         print(response)
         try:
             response = read_sql_query(response, "students.db")
-            st.subheader("The Response is")
+            st.subheader("The Response is:")
             for row in response:
                 print(row)
                 st.write(row)
